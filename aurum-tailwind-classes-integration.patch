@@ -1,0 +1,56 @@
+diff --git a/src/AurumPreview.jsx b/src/AurumPreview.jsx
+index 3b3b3b3..4c4c4c4 100644
+--- a/src/AurumPreview.jsx
++++ b/src/AurumPreview.jsx
+@@ -1,4 +1,5 @@
+ import React, { useMemo, useRef, useState, useEffect } from "react";
++// Tailwind theme applied: uses colors defined in tailwind.config.js (bg, panel, panel2, border, text, muted, gold*)
+
+ const THEME = {
+   bg: "#0b0c0f",
+@@ -86,10 +87,10 @@ function Message({ m }){
+   return (
+-    <div className="space-y-1 rounded-md p-3" style={{ background: "#0e1015cc", border: `1px solid ${THEME.border}`, boxShadow: `0 8px 24px -12px ${THEME.glow}` }}>
+-      <div className="text-xs flex items-center gap-2" style={{ color: THEME.muted }}>
++    <div className="space-y-1 rounded-md p-3 border border-border bg-panel/80 shadow-[0_8px_24px_-12px_rgba(241,197,80,0.25)]">
++      <div className="text-xs flex items-center gap-2 text-muted">
+         <Avatar name={m.author} presence={'online'} />
+         <span>{m.author}</span>
+       </div>
+-      {m.content && <div className="text-sm" style={{ color: THEME.text }}>{m.content}</div>}
++      {m.content && <div className="text-sm text-text">{m.content}</div>}
+     </div>
+   )
+ }
+@@ -97,34 +98,34 @@ export default function AurumPreview(){
+   const [messages, setMessages] = React.useState([{id:1, author:'admin@you', content:'Welcome to W&W — Gold & Black.'}]);
+   return (
+-    <div style={{ background: THEME.bg, minHeight:'100vh', color: THEME.text }}>
+-      <div style={{ padding: 16, borderBottom:`1px solid ${THEME.border}`, background: THEME.panel }}>
+-        <div style={{ fontWeight: 700, color: THEME.gold500 }}>Aurum Chat</div>
++    <div className="bg-bg text-text min-h-screen">
++      <div className="p-4 border-b border-border bg-panel">
++        <div className="font-bold text-gold500">Aurum Chat</div>
+       </div>
+-      <div style={{ display:'grid', gridTemplateRows:'1fr auto', height:'calc(100vh - 56px)' }}>
+-        <div className="p-4 space-y-3" style={{ overflow:'auto', background: THEME.panel2 }}>
++      <div className="grid" style={{ gridTemplateRows:'1fr auto', height:'calc(100vh - 56px)' }}>
++        <div className="p-4 space-y-3 overflow-auto bg-panel2">
+           {messages.map(m => <Message key={m.id} m={m} />)}
+         </div>
+-        <div style={{ borderTop:`1px solid ${THEME.border}`, padding:12 }}>
+-          <button onClick={()=> setMessages(ms=>[...ms,{id:Date.now(), author:'you', content:'Hello!'}])} style={{ background: THEME.gold600, color:'#000', padding: '8px 12px', borderRadius:8, fontWeight:600 }}>Send sample</button>
++        <div className="border-t border-border p-3">
++          <button onClick={()=> setMessages(ms=>[...ms,{id:Date.now(), author:'you', content:'Hello!'}])} className="bg-gold600 text-black px-3 py-2 rounded font-semibold">Send sample</button>
+         </div>
+       </div>
+-      <div style={{ padding: 16 }}>
+-        <div className="rounded-lg" style={{ border:`1px solid ${THEME.border}` }}>
++      <div className="p-4">
++        <div className="rounded-lg border border-border">
+           <CanvasLab />
+         </div>
+       </div>
+     </div>
+   )
+ }
